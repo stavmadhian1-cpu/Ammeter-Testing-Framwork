@@ -1,0 +1,7 @@
+2026-11-04 12:25:36,814  INFO     Test started: Greenlee, ENTES, CIRCUTOR, 100 measurements, 4 s, 25 Hz, setup {'emulator_mode': 'realistic'}
+2026-11-04 12:25:40,915  INFO     Run ID 20261104_122536_25b7: Test finished in 4.000 s.   Settings: 100 measurements, 4 s, 25 Hz
+2026-11-04 12:25:40,916  INFO     Greenlee: collected 100/100, 0 errors, mean 0.106743 A, max delay 11.37 ms, timing OK
+2026-11-04 12:25:40,916  INFO     ENTES: collected 100/100, 0 errors, mean 87.3447 A, max delay 4.66 ms, timing OK
+2026-11-04 12:25:40,916  INFO     CIRCUTOR: collected 100/100, 0 errors, mean 0.0273312 A, max delay 68.88 ms, timing Late 3/100 (3.0%)
+2026-11-04 12:25:40,917  WARNING  CIRCUTOR: late measurements, Late 3/100 (3.0%)
+2026-11-04 12:25:40,917  INFO     Test finished.

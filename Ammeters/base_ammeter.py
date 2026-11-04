@@ -6,9 +6,36 @@ from abc import ABC, abstractmethod
 NotImplementedErrorMsg = "Subclasses must implement this property."
 
 class AmmeterEmulatorBase(ABC):
-    def __init__(self, port: int):
+    def __init__(self, port: int, realistic: bool = False):
+        """
+        realistic: if True, the device constants (like a shunt resistance or a calibration factor) are chosen randomly
+        at the first measurement and stay the same while the emulator runs, like in a real device.
+        If False (the default), they are random in every measurement, as in the original emulators.
+        """
         self.port = port
+        self.realistic = realistic
+        self._device_constants = {}
         random.seed(time.time())  # Seed the random number generator for each instance
+
+    @property
+    def device_constants(self) -> dict:
+        """
+        The device constants chosen so far in realistic mode, e.g. {"resistance": 15.26}.
+        """
+        return dict(self._device_constants)
+
+    def device_constant(self, name: str, min_value: float, max_value: float) -> float:
+        """
+        Returns the value of a device constant: a new random value every time,
+        or in realistic mode the same random value for the whole session.
+        """
+        if not self.realistic:
+            return random.uniform(min_value, max_value)
+        if name not in self._device_constants:
+            self._device_constants[name] = random.uniform(min_value, max_value)
+            print(f"{self.__class__.__name__} (realistic mode) - fixed {name} for this session: "
+                  f"{self._device_constants[name]}")
+        return self._device_constants[name]
 
     def start_server(self):
         """

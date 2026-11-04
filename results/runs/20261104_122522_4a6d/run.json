@@ -1,0 +1,98 @@
+{
+  "run_id": "20261104_122522_4a6d",
+  "started_at": "2026-11-04T12:25:22",
+  "status": "finished",
+  "total_time_s": 4.000611800001934,
+  "settings": {
+    "count": 80,
+    "duration_s": 4.0,
+    "frequency_hz": 20.0,
+    "interval_s": 0.05
+  },
+  "environment": {
+    "python": "3.13.14",
+    "os": "Windows-11-10.0.26200-SP0"
+  },
+  "setup": {
+    "emulator_mode": "realistic",
+    "device_constants": {
+      "greenlee": {
+        "resistance": 48.208229448123674
+      },
+      "entes": {
+        "calibration factor": 1539.8698787749497
+      },
+      "circutor": {
+        "time step": 0.0048520543723698266
+      }
+    }
+  },
+  "ammeters": {
+    "greenlee": {
+      "ammeter": {
+        "type": "greenlee",
+        "name": "Greenlee",
+        "port": 5000,
+        "command": "MEASURE_GREENLEE -get_measurement",
+        "method": "Ohm's law: I = V / R"
+      },
+      "collected": 80,
+      "expected": 80,
+      "statistics": {
+        "mean": 0.11372173004396,
+        "median": 0.118050182161626,
+        "std_dev": 0.053556196856522825,
+        "min": 0.02428231412044291,
+        "max": 0.2062374871979676
+      },
+      "max_delay_s": 0.0027617000159807503,
+      "timing": "OK",
+      "late_readings": 0,
+      "errors": []
+    },
+    "entes": {
+      "ammeter": {
+        "type": "entes",
+        "name": "ENTES",
+        "port": 5001,
+        "command": "MEASURE_ENTES -get_data",
+        "method": "Hall effect: I = B * K"
+      },
+      "collected": 80,
+      "expected": 80,
+      "statistics": {
+        "mean": 77.82525926292134,
+        "median": 73.73047670482066,
+        "std_dev": 36.82682850415119,
+        "min": 17.955541568913553,
+        "max": 153.43144141258588
+      },
+      "max_delay_s": 0.0034512999991420656,
+      "timing": "OK",
+      "late_readings": 0,
+      "errors": []
+    },
+    "circutor": {
+      "ammeter": {
+        "type": "circutor",
+        "name": "CIRCUTOR",
+        "port": 5002,
+        "command": "MEASURE_CIRCUTOR -get_measurement",
+        "method": "Rogowski coil integration: I = integral of V dt"
+      },
+      "collected": 80,
+      "expected": 80,
+      "statistics": {
+        "mean": 0.026219621231949968,
+        "median": 0.02663211167395594,
+        "std_dev": 0.0038914420628765713,
+        "min": 0.014225223752951046,
+        "max": 0.03310410336492562
+      },
+      "max_delay_s": 0.003914200002327561,
+      "timing": "OK",
+      "late_readings": 0,
+      "errors": []
+    }
+  }
+}

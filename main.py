@@ -1,37 +1,54 @@
+import argparse
 import threading
-import time
 
 from Ammeters.Circutor_Ammeter import CircutorAmmeter
 from Ammeters.Entes_Ammeter import EntesAmmeter
 from Ammeters.Greenlee_Ammeter import GreenleeAmmeter
-from Ammeters.client import request_current_from_ammeter
+from src.gui.measurement_app import MeasurementApp
 
 
-def run_greenlee_emulator():
-    greenlee = GreenleeAmmeter(5001)
-    greenlee.start_server()
+class Emulators:
+    """
+    The three ammeter emulators, each running in its own thread. The window uses this to switch realistic mode.
+    """
 
-def run_entes_emulator():
-    entes = EntesAmmeter(5002)
-    entes.start_server()
+    def __init__(self, realistic: bool = False):
+        self.emulators = {
+            "greenlee": GreenleeAmmeter(5000, realistic),
+            "entes": EntesAmmeter(5001, realistic),
+            "circutor": CircutorAmmeter(5002, realistic),
+        }
 
-def run_circutor_emulator():
-    circutor = CircutorAmmeter(5003)
-    circutor.start_server()
+    def start(self):
+        for emulator in self.emulators.values():
+            threading.Thread(target=emulator.start_server, daemon=True).start()
+
+    def set_realistic(self, realistic: bool):
+        # Device constants already chosen are kept, so turning realistic mode on again gives the same "device"
+        for emulator in self.emulators.values():
+            emulator.realistic = realistic
+
+    def device_constants(self) -> dict:
+        """
+        The device constants chosen so far, per ammeter type, e.g. {"greenlee": {"resistance": 15.26}}.
+        """
+        return {ammeter_type: emulator.device_constants for ammeter_type, emulator in self.emulators.items()
+                if emulator.device_constants}
+
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Ammeter emulators and measurement window")
+    parser.add_argument("--realistic", action="store_true",
+                        help="start with realistic emulators (can also be switched in the window): device constants "
+                             "(Greenlee resistance, ENTES calibration factor, CIRCUTOR time step) are chosen once "
+                             "and stay the same until the program closes")
+    args = parser.parse_args()
+
     # Start each ammeter in a separate thread
-    threading.Thread(target=run_greenlee_emulator, daemon=True).start()
-    threading.Thread(target=run_entes_emulator, daemon=True).start()
-    threading.Thread(target=run_circutor_emulator, daemon=True).start()
+    emulators = Emulators(args.realistic)
+    emulators.start()
 
-    # This section is commented out because it shouldn't work.
-    # Read the README.md file as well as the source code if you need, and fix the problem.
-
-    # Wait for the servers to start, if you have problem restarting the servers between runs try increasing sleep time.
-    time.sleep(5)
-    request_current_from_ammeter(5001, b'MEASURE_GREENLEE')  # Request from Greenlee Ammeter
-    request_current_from_ammeter(5002, b'MEASURE_ENTES')  # Request from ENTES Ammeter
-    request_current_from_ammeter(5003, b'MEASURE_CIRCUTOR')  # Request from CIRCUTOR Ammeter
-
-    pass
+    # Open the measurement window. The emulators are ready long before the user can click "Start measurement".
+    # If you have problem restarting the servers between runs, wait a few seconds before running again.
+    MeasurementApp(realistic=args.realistic, set_realistic=emulators.set_realistic,
+                   device_constants=emulators.device_constants).run()

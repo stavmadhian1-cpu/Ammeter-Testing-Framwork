@@ -1,0 +1,6 @@
+2026-11-04 12:25:22,291  INFO     Test started: Greenlee, ENTES, CIRCUTOR, 80 measurements, 4 s, 20 Hz, setup {'emulator_mode': 'realistic'}
+2026-11-04 12:25:26,392  INFO     Run ID 20261104_122522_4a6d: Test finished in 4.001 s.   Settings: 80 measurements, 4 s, 20 Hz
+2026-11-04 12:25:26,393  INFO     Greenlee: collected 80/80, 0 errors, mean 0.113722 A, max delay 2.76 ms, timing OK
+2026-11-04 12:25:26,394  INFO     ENTES: collected 80/80, 0 errors, mean 77.8253 A, max delay 3.45 ms, timing OK
+2026-11-04 12:25:26,394  INFO     CIRCUTOR: collected 80/80, 0 errors, mean 0.0262196 A, max delay 3.91 ms, timing OK
+2026-11-04 12:25:26,415  INFO     Test finished.

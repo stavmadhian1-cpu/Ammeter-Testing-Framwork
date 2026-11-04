@@ -1,0 +1,19 @@
+Test run 20261104_122549_c65e, started 2026-11-04 12:25:49, realistic emulators
+Test finished in 6.000 s.   Settings: 300 measurements, 6 s, 50 Hz
+
+Ammeter   Collected  Errors  Mean (A)   Median (A)  Std dev (A)  Min (A)    Max (A)    Max delay (ms)  Timing            
+--------  ---------  ------  ---------  ----------  -----------  ---------  ---------  --------------  ------------------
+Greenlee  300 / 300  0       0.117711   0.119999    0.054398     0.0215035  0.207217   84.87           Late 11/300 (3.7%)
+ENTES     300 / 300  0       86.8566    87.6851     38.4296      15.8519    153.098    83.45           Late 10/300 (3.3%)
+CIRCUTOR  300 / 300  0       0.0263495  0.0263248   0.00383874   0.0166703  0.0373523  134.32          Late 17/300 (5.7%)
+
+Ammeter comparison (1 run)
+Rank  Ammeter   Runs  Success rate      Mean (A)   Std dev (A)  CV (%)  95% CI of mean  Run-to-run CV (%)  Timing                                
+----  --------  ----  ----------------  ---------  -----------  ------  --------------  -----------------  --------------------------------------
+1     CIRCUTOR  1     100.0% (300/300)  0.0263495  0.00383874   14.6    ±1.6%           -                  Late in 1 of 1 runs (5.7% of readings)
+2     ENTES     1     100.0% (300/300)  86.8566    38.4296      44.2    ±5.0%           -                  Late in 1 of 1 runs (3.3% of readings)
+3     Greenlee  1     100.0% (300/300)  0.117711   0.054398     46.2    ±5.2%           -                  Late in 1 of 1 runs (3.7% of readings)
+
+Most reliable: CIRCUTOR (Rogowski coil integration: I = integral of V dt) - success rate 100.0% and the steadiest readings (CV 14.6%).
+Agreement: the average currents differ by a factor of 3,296. Ammeters measuring the same circuit should agree, so they don't measure the same current here: each emulator returns independent random values.
+Accuracy (closeness to the real current) can't be determined without a known reference current, so the ranking is based on reliability and precision.

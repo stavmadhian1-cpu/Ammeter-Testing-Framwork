@@ -1,0 +1,87 @@
+{
+  "run_id": "20261104_122420_7217",
+  "started_at": "2026-11-04T12:24:20",
+  "status": "finished",
+  "total_time_s": 6.667425999999978,
+  "settings": {
+    "count": 100,
+    "duration_s": 6.666666666666667,
+    "frequency_hz": 15.0,
+    "interval_s": 0.06666666666666667
+  },
+  "environment": {
+    "python": "3.13.14",
+    "os": "Windows-11-10.0.26200-SP0"
+  },
+  "setup": {
+    "emulator_mode": "original"
+  },
+  "ammeters": {
+    "greenlee": {
+      "ammeter": {
+        "type": "greenlee",
+        "name": "Greenlee",
+        "port": 5000,
+        "command": "MEASURE_GREENLEE -get_measurement",
+        "method": "Ohm's law: I = V / R"
+      },
+      "collected": 100,
+      "expected": 100,
+      "statistics": {
+        "mean": 1.281678941670189,
+        "median": 0.1150518587431613,
+        "std_dev": 6.588448645724897,
+        "min": 0.01668213749960007,
+        "max": 61.642749418390764
+      },
+      "max_delay_s": 0.002668599976459518,
+      "timing": "OK",
+      "late_readings": 0,
+      "errors": []
+    },
+    "entes": {
+      "ammeter": {
+        "type": "entes",
+        "name": "ENTES",
+        "port": 5001,
+        "command": "MEASURE_ENTES -get_data",
+        "method": "Hall effect: I = B * K"
+      },
+      "collected": 100,
+      "expected": 100,
+      "statistics": {
+        "mean": 63.42477363731725,
+        "median": 57.99843022642689,
+        "std_dev": 38.537302816508195,
+        "min": 11.003717352732192,
+        "max": 187.80009862167645
+      },
+      "max_delay_s": 0.00274196665850468,
+      "timing": "OK",
+      "late_readings": 0,
+      "errors": []
+    },
+    "circutor": {
+      "ammeter": {
+        "type": "circutor",
+        "name": "CIRCUTOR",
+        "port": 5002,
+        "command": "MEASURE_CIRCUTOR -get_measurement",
+        "method": "Rogowski coil integration: I = integral of V dt"
+      },
+      "collected": 100,
+      "expected": 100,
+      "statistics": {
+        "mean": 0.031267951634602435,
+        "median": 0.032239629391025156,
+        "std_dev": 0.014334312705714333,
+        "min": 0.004960764964523462,
+        "max": 0.06017071010187822
+      },
+      "max_delay_s": 0.0024899666605051607,
+      "timing": "OK",
+      "late_readings": 0,
+      "errors": []
+    }
+  }
+}

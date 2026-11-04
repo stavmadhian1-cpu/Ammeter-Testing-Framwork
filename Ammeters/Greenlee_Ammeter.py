@@ -10,7 +10,8 @@ class GreenleeAmmeter(AmmeterEmulatorBase):
 
     def measure_current(self) -> float:
         voltage = generate_random_float(1.0, 10.0)  # Random voltage (1V - 10V)
-        resistance = generate_random_float(0.1, 100.0)  # Random resistance (0.1Ω - 100Ω)
+        resistance = self.device_constant("resistance", 0.1, 100.0)  # Resistance (0.1Ω - 100Ω)
         current = voltage / resistance
-        print(f"Greenlee Ammeter - Voltage: {voltage}V, Resistance: {resistance}Ω, Current: {current}A")
+        # "Ohm" instead of the symbol: printing it crashed the server when the output isn't UTF-8 (see FIXES.md, Fix 5)
+        print(f"Greenlee Ammeter - Voltage: {voltage}V, Resistance: {resistance} Ohm, Current: {current}A")
         return current
